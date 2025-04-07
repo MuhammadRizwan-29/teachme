@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useMatch } from "react-router-dom";
 import Home from "./Pages/Student/Home";
 import CourseDetails from "./Pages/Student/CourseDetails";
 import CoursesList from "./Pages/Student/CoursesList";
@@ -10,10 +10,15 @@ import Dashboard from "./Pages/Educator/Dashboard";
 import AddCourse from "./Pages/Educator/AddCourse";
 import MyCourses from "./Pages/Educator/MyCourses";
 import StudentEnrolled from "./Pages/Educator/StudentEnrolled";
+import Navbar from "./components/Students/Navbar";
 
 function App() {
+  const isEducatorRoute = useMatch("/educator/*");
+
   return (
-    <>
+    <main className="text-default min-h-screen bg-white">
+      {!isEducatorRoute && <Navbar />}
+
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/course-list" element={<CoursesList />} />
@@ -32,7 +37,7 @@ function App() {
           />
         </Route>
       </Routes>
-    </>
+    </main>
   );
 }
 
